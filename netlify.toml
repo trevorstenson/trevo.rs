@@ -1,0 +1,13 @@
+[[headers]]
+	for = "/*"
+	[headers.values]
+		# Netlify sets cache to 0 to allow rollbacks, but this content isn't
+		# going to change and we use "cache buster" query parameters anyway, so
+		# set a Cache-Control header which prevents cache revalidation requests.
+		Cache-Control = "public, max-age=7776000"  # 90 days
+		Access-Control-Allow-Origin = "*"
+
+# count.min.js no longer exists, so redirect to count.js
+[[redirects]]
+  from = "/count.min.js"
+  to   = "/count.js"
