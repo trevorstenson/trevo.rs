@@ -9,8 +9,8 @@
   "SITE_URL": "https://trevo.rs",
   "PINNED_POSTS": [
   ],
-  "REPO_URL": "https://github.com/healeycodes/healeycodes.com",
-  "EDIT_POST_URL": "https://github.com/healeycodes/healeycodes.com/tree/main/posts",
-  "BUTTON_DOWN_USER": "healeycodes",
+  "REPO_URL": "https://github.com/trevorstenson/trevo.rs",
+  "EDIT_POST_URL": "https://github.com/trevorstenson/trevo.rs/tree/main/posts",
+  "BUTTON_DOWN_USER": "trevorstenson",
   "LAYOUT_WIDTH": 725
 }

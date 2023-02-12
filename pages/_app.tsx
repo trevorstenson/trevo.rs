@@ -5,7 +5,7 @@ function MyApp({ Component, pageProps }) {
 
     return <>
         <Analytics />
-        <GCScript siteUrl={"https://healeycodes.goatcounter.com/count"} />
+        <GCScript siteUrl={"https://trevorstenson.goatcounter.com/count"} />
         <Component {...pageProps} />
     </>
 }

@@ -1,6 +1,6 @@
-[![e2e](https://github.com/healeycodes/healeycodes.com/actions/workflows/e2e.yml/badge.svg)](https://github.com/healeycodes/healeycodes.com/actions/workflows/e2e.yml)
+[![e2e](https://github.com/trevorstenson/trevo.rs/actions/workflows/e2e.yml/badge.svg)](https://github.com/trevorstenson/trevo.rs/actions/workflows/e2e.yml)
 
-# healeycodes.com
+# trevo.rs
 
 My home on the web! A collection of thoughts and software experiments.
 
