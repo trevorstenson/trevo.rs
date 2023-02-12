@@ -42,10 +42,10 @@ export async function getStaticProps({ params }) {
   let nextPost = null;
   const nextAndPrevPosts = getNextAndPrevPosts(params.id);
   if (nextAndPrevPosts.previous !== null) {
-    prevPost = {
-      id: nextAndPrevPosts.previous,
-      ...getPostData(nextAndPrevPosts.previous),
-    };
+    // prevPost = {
+    //   id: nextAndPrevPosts.previous,
+    //   ...getPostData(nextAndPrevPosts.previous),
+    // };
   }
   if (nextAndPrevPosts.next !== null) {
     nextPost = {
@@ -93,7 +93,7 @@ export default function Post({
               </Link>
             ))
             .reduce((prev, curr) => [prev, ", ", curr])}{" "}
-          — <a href={`${siteConfig.EDIT_POST_URL}/${id}.md`}>Edit on GitHub</a>
+          {/* — <a href={`${siteConfig.EDIT_POST_URL}/${id}.md`}>Edit on GitHub</a> */}
         </p>
       </header>
       <main className="post-text">
@@ -127,7 +127,7 @@ export default function Post({
         </Markdown>
       </main>
       <hr />
-      <Newsletter />
+      {/* <Newsletter /> */}
       <div className="other-posts">
         {prevPost ? (
           <div className="other-posts-link">

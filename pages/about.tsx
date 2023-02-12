@@ -9,20 +9,46 @@ export default function About() {
     <Layout title="About" description="About me.">
       <h1>About</h1>
       <main>
+        Hey, I'm Trevor Stenson.
+        <p>I'm interested in:</p>
+        <ul>
+          <li>Full stack development</li>
+          <li>Web performance</li>
+          <li>Natural language processing</li>
+        </ul>
         <p>
-          I write software and write about software. I{" "}
-          <a href="mailto:healeycodes@gmail.com">love getting email</a> —
-          consider this a{" "}
-          <a
-            href="https://www.kalzumeus.com/standing-invitation/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            standing invitation
+          On this blog I write about things that interest me and projects I am working on. In my spare time
+          I enjoy juggling, road cycling, skiing, and hiking. I read a lot of
+          science fiction. My favorite books include{" "}
+          <a href="https://www.goodreads.com/en/book/show/17863">Accelerando</a>{" "}
+          and{" "}
+          <a href="https://www.goodreads.com/book/show/20518872-the-three-body-problem">
+            The Three Body Problem
           </a>
-          . My research interests include personal computing, game solvers (chess, sokoban, and more), and programming language design. This <a href={siteConfig.REPO_URL}>open source</a> website is built with Next.js.
+          .
         </p>
-        <SpacedImage
+        <h2>Work</h2>
+        <p>
+          I am currently a full stack engineer at <a>Reprise</a> building an
+          infrastructure-less web platform for no-code product demos.
+        </p>
+        <p>
+          In 2020, I worked at <a>Smartleaf</a> building an enterprise ruby on
+          rails platform for automated tax-loss harvesting. Before that I
+          contributed to multiple full stack client projects at{" "}
+          <a>Rightpoint</a>.
+        </p>
+        <h2>Contact</h2>
+        <p>
+          Github: <a>https://github.com/trevorstenson</a>
+          <br />
+          Email: <a href="mailto">mail@trevo.rs</a>
+        </p>
+        <p>
+          I love talking to people who share similar interests, so feel free to
+          reach out!
+        </p>
+        {/* <SpacedImage
           src={mePresenting}
           placeholder="blur"
           alt="Presenting: When Does Development Spark Joy? Sentimental analysis of commit messages."
@@ -30,25 +56,7 @@ export default function About() {
           originalWidth={mePresenting.width}
           originalHeight={mePresenting.height}
           priority={true}
-        />
-        <p>
-          I like teaching people things that I know. I like video games,
-          running, and reading.
-        </p>
-        <p>
-          I am easily impressed by people and the cool stuff that they build. I
-          read a lot of personal and technical blogs. If we've ever interacted,
-          I've visited your website and probably think it's cool!
-        </p>
-        <p>Technical books I recommend include Grokking Algorithms, Crafting Interpreters, Classic Computing Problems in Python, and The Computational Beauty of Nature. Non-tech authors I recommend include Patricia Lockwood and Ben Lerner. In my undergrad, I mostly studied post-WWII fiction.</p>
-        <p>I like being outside and prefer cold days. I enjoy the rain.</p>
-        <h2>Work</h2>
-        <p>I'm a software engineer at Vercel.</p>
-        <h2>Education</h2>
-        <ul>
-          <li>M.S.c. in Computer Science (Distinction)</li>
-          <li>B.A. in Creative Writing (with First Class Honours)</li>
-        </ul>
+        /> */}
       </main>
     </Layout>
   );

@@ -10,11 +10,11 @@ export default function Nav() {
           <Link href="/" legacyBehavior>{siteConfig.AUTHOR_NAME}</Link>
         </li>
         <li>
-          <Link href="/articles" legacyBehavior>Articles</Link>
+          <Link href="/blog" legacyBehavior>Blog</Link>
         </li>
-        <li>
+        {/* <li>
           <Link href="/projects" legacyBehavior>Projects</Link>
-        </li>
+        </li> */}
         <li>
           <Link href="/about" legacyBehavior>About</Link>
         </li>
@@ -26,14 +26,14 @@ export default function Nav() {
             GitHub
           </a>
         </li>
-        <li>
+        {/* <li>
           <a
             href={`https://twitter.com/${siteConfig.AUTHOR_TWITTER}`}
             target="_blank"
           >
             Twitter
           </a>
-        </li>
+        </li> */}
         <li>
           <a href="/feed.xml">RSS</a>
         </li>

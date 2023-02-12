@@ -1,5 +1,6 @@
 import siteConfig from "../siteConfig.json";
-import meAvatar from "../public/assets/avatar-v1.jpg";
+// import meAvatar from "../public/assets/avatar-v1.jpg";
+import meAvatar from "../public/assets/my_face.jpg";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -40,29 +41,33 @@ export default function Home({ allPostsData, description, words }) {
         <div className="avatar">
           <Image
             width={140}
-            height={140}
+            height={191}
             src={meAvatar}
-            alt="Andrew Healey."
+            alt="Trevor Stenson."
             quality={100}
             placeholder="blur"
             priority={true}
           />
+          <div>
+            
           <p className="avatar-text">
-            Hey, I'm Andrew Healey. I'm a software engineer at Vercel, and I'm interested in the joy of computing. I've written{" "}
-            {numberWithCommas(words)} words on this{" "}
-            <a href={siteConfig.REPO_URL}>open source</a> website.
+            Hey, Im Trevor Stenson, and welcome to my personal site!
+            I am a full stack software engineer at Reprise interested in
+            all things web development.
           </p>
+          <p className="avatar-text">Feel free to check out my <Link href="/blog">blog</Link> or learn more <Link href="/about">about me</Link>.</p>
+          </div>
         </div>
 
         <div className="posts">
           <section className="posts-section">
             <h2>
               Recent (
-              <Link href="/articles" legacyBehavior>{`${allPostsData.length} articles`}</Link>)
+              <Link href="/blog" legacyBehavior>{`${allPostsData.length} posts`}</Link>)
             </h2>
             <PostList posts={allPostsData.slice(0, 3)} hideTags={true} />
           </section>
-          <section className="posts-section">
+          {/* <section className="posts-section">
             <h2>Popular</h2>
             <PostList
               posts={allPostsData.filter((post) =>
@@ -70,12 +75,12 @@ export default function Home({ allPostsData, description, words }) {
               )}
               hideTags={true}
             />
-          </section>
+          </section> */}
         </div>
       </main>
-      <footer>
+      {/* <footer>
         <Newsletter />
-      </footer>
+      </footer> */}
       <style jsx>{`.avatar {
           display: flex;
           align-items: center;
@@ -88,11 +93,12 @@ export default function Home({ allPostsData, description, words }) {
         }
         .posts {
           display: flex;
+          justify-content: center;
         }
-        .posts-section {
-          flex: 1;
-          padding-right: 20px;
-        }
+        // .posts-section {
+        //   flex: 1;
+        //   padding-right: 20px;
+        // }
 
         @media only screen and (max-width: ${siteConfig.LAYOUT_WIDTH}px) {
           .avatar {
