@@ -33,9 +33,9 @@ export default function TagList({ otherTags, tag, posts }) {
     <Layout title={title} description={`All posts tagged with ${formattedTag}`}>
       <h1 className="tag-desc">{title}</h1>
       <main>
-        <p className="other-tags">
+        {/* <p className="other-tags">
           Other tags:{" "}
-          {formattedTags
+          {(formattedTags || [])
             .map((formattedTag, i) => (
               <Link href={`/tags/${otherTags[i]}`} key={i} legacyBehavior>
                 {formattedTag}
@@ -43,7 +43,7 @@ export default function TagList({ otherTags, tag, posts }) {
             ))
             .reduce((prev, curr) => [prev, ", ", curr])}{" "}
           or <Link href="/articles" legacyBehavior>all articles</Link>.
-        </p>
+        </p> */}
         <PostList posts={posts} hideTags={false} />
       </main>
       <style jsx>{`
