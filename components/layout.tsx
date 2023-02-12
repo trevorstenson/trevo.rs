@@ -19,7 +19,7 @@ export default function Layout({ children, title, description }) {
           title={`RSS Feed for ${siteConfig.SITE_URL}`}
           href="/feed.xml"
         />
-        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="shortcut icon" href="/favicon-large.png" />
 
         <meta charSet="UTF-8" />
 
