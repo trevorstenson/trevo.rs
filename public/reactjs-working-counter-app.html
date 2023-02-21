@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html><head>
+  <title>ReactJS Working Counter App</title>
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin=""></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin=""></script>
+  <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+    }
+  </style>
+<script>"use strict";
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Counter = function (_React$Component) {
+_inherits(Counter, _React$Component);
+
+function Counter(props) {
+  _classCallCheck(this, Counter);
+
+  var _this = _possibleConstructorReturn(this, (Counter.__proto__ || Object.getPrototypeOf(Counter)).call(this, props));
+
+  _this.increment = function () {
+    _this.setState({
+      count: _this.state.count + 1
+    });
+  };
+
+  _this.decrement = function () {
+    _this.setState({
+      count: _this.state.count - 1
+    });
+  };
+
+  _this.state = {
+    count: 0
+  };
+  return _this;
+}
+
+_createClass(Counter, [{
+  key: "render",
+  value: function render() {
+    return React.createElement(
+      "div",
+      null,
+      React.createElement(
+        "h1",
+        null,
+        "Counter App"
+      ),
+      React.createElement(
+        "h2",
+        null,
+        this.state.count
+      ),
+      React.createElement(
+        "button",
+        { onClick: this.increment },
+        "+"
+      ),
+      React.createElement(
+        "button",
+        { onClick: this.decrement },
+        "-"
+      )
+    );
+  }
+}]);
+
+return Counter;
+}(React.Component);
+
+ReactDOM.render(React.createElement(Counter, null), document.getElementById("root"));
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIklubGluZSBCYWJlbCBzY3JpcHQiXSwibmFtZXMiOlsiQ291bnRlciIsInByb3BzIiwiaW5jcmVtZW50Iiwic2V0U3RhdGUiLCJjb3VudCIsInN0YXRlIiwiZGVjcmVtZW50IiwiUmVhY3QiLCJDb21wb25lbnQiLCJSZWFjdERPTSIsInJlbmRlciIsImRvY3VtZW50IiwiZ2V0RWxlbWVudEJ5SWQiXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7SUFDWUEsTzs7O0FBQ0osbUJBQVlDLEtBQVosRUFBbUI7QUFBQTs7QUFBQSxrSEFDWEEsS0FEVzs7QUFBQSxVQU1uQkMsU0FObUIsR0FNUCxZQUFNO0FBQ2hCLFlBQUtDLFFBQUwsQ0FBYztBQUNaQyxlQUFPLE1BQUtDLEtBQUwsQ0FBV0QsS0FBWCxHQUFtQjtBQURkLE9BQWQ7QUFHRCxLQVZrQjs7QUFBQSxVQVduQkUsU0FYbUIsR0FXUCxZQUFNO0FBQ2hCLFlBQUtILFFBQUwsQ0FBYztBQUNaQyxlQUFPLE1BQUtDLEtBQUwsQ0FBV0QsS0FBWCxHQUFtQjtBQURkLE9BQWQ7QUFHRCxLQWZrQjs7QUFFakIsVUFBS0MsS0FBTCxHQUFhO0FBQ1hELGFBQU87QUFESSxLQUFiO0FBRmlCO0FBS2xCOzs7OzZCQVdRO0FBQ1AsYUFDRTtBQUFBO0FBQUE7QUFDRTtBQUFBO0FBQUE7QUFBQTtBQUFBLFNBREY7QUFFRTtBQUFBO0FBQUE7QUFBSyxlQUFLQyxLQUFMLENBQVdEO0FBQWhCLFNBRkY7QUFHRTtBQUFBO0FBQUEsWUFBUSxTQUFTLEtBQUtGLFNBQXRCO0FBQUE7QUFBQSxTQUhGO0FBSUU7QUFBQTtBQUFBLFlBQVEsU0FBUyxLQUFLSSxTQUF0QjtBQUFBO0FBQUE7QUFKRixPQURGO0FBUUQ7Ozs7RUExQm1CQyxNQUFNQyxTOztBQTRCNUJDLFNBQVNDLE1BQVQsQ0FBZ0Isb0JBQUMsT0FBRCxPQUFoQixFQUE2QkMsU0FBU0MsY0FBVCxDQUF3QixNQUF4QixDQUE3QiIsImZpbGUiOiJJbmxpbmUgQmFiZWwgc2NyaXB0Iiwic291cmNlc0NvbnRlbnQiOlsiXG4gICAgICBjbGFzcyBDb3VudGVyIGV4dGVuZHMgUmVhY3QuQ29tcG9uZW50IHtcbiAgICAgICAgY29uc3RydWN0b3IocHJvcHMpIHtcbiAgICAgICAgICBzdXBlcihwcm9wcyk7XG4gICAgICAgICAgdGhpcy5zdGF0ZSA9IHtcbiAgICAgICAgICAgIGNvdW50OiAwXG4gICAgICAgICAgfTtcbiAgICAgICAgfVxuICAgICAgICBpbmNyZW1lbnQgPSAoKSA9PiB7XG4gICAgICAgICAgdGhpcy5zZXRTdGF0ZSh7XG4gICAgICAgICAgICBjb3VudDogdGhpcy5zdGF0ZS5jb3VudCArIDFcbiAgICAgICAgICB9KTtcbiAgICAgICAgfTtcbiAgICAgICAgZGVjcmVtZW50ID0gKCkgPT4ge1xuICAgICAgICAgIHRoaXMuc2V0U3RhdGUoe1xuICAgICAgICAgICAgY291bnQ6IHRoaXMuc3RhdGUuY291bnQgLSAxXG4gICAgICAgICAgfSk7XG4gICAgICAgIH07XG4gICAgICAgIHJlbmRlcigpIHtcbiAgICAgICAgICByZXR1cm4gKFxuICAgICAgICAgICAgPGRpdj5cbiAgICAgICAgICAgICAgPGgxPkNvdW50ZXIgQXBwPC9oMT5cbiAgICAgICAgICAgICAgPGgyPnt0aGlzLnN0YXRlLmNvdW50fTwvaDI+XG4gICAgICAgICAgICAgIDxidXR0b24gb25DbGljaz17dGhpcy5pbmNyZW1lbnR9Pis8L2J1dHRvbj5cbiAgICAgICAgICAgICAgPGJ1dHRvbiBvbkNsaWNrPXt0aGlzLmRlY3JlbWVudH0+LTwvYnV0dG9uPlxuICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgKTtcbiAgICAgICAgfVxuICAgICAgfVxuICAgICAgUmVhY3RET00ucmVuZGVyKDxDb3VudGVyIC8+LCBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcInJvb3RcIikpO1xuICAgICJdfQ==</script></head>
+<body>
+  <div id="root"><div><h1>Counter App</h1><h2>0</h2><button>+</button><button>-</button></div></div>
+  <script type="text/babel">
+    class Counter extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          count: 0
+        };
+      }
+      increment = () => {
+        this.setState({
+          count: this.state.count + 1
+        });
+      };
+      decrement = () => {
+        this.setState({
+          count: this.state.count - 1
+        });
+      };
+      render() {
+        return (
+          <div>
+            <h1>Counter App</h1>
+            <h2>{this.state.count}</h2>
+            <button onClick={this.increment}>+</button>
+            <button onClick={this.decrement}>-</button>
+          </div>
+        );
+      }
+    }
+    ReactDOM.render(<Counter />, document.getElementById("root"));
+  </script>
+
+</body></html>

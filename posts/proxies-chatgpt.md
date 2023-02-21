@@ -1,7 +1,7 @@
 ---
 title: "Proxies and ChatGPT"
 date: "2023-01-15"
-tags: ["javascript"]
+tags: ["javascript", "LLMs"]
 description: "Messing with runtime LLM function generation"
 ---
 
@@ -67,7 +67,7 @@ const proxy_handler = {
   get: (target, prop, receiver) => {
     return () => {
       const parse_prop = prop.match(/[A-Z][a-z]+/g);
-      let prompt = parse_prop.join(" ");
+      const prompt = parse_prop.join(" ");
       const arg_list = Object.values(arguments);
       const arg_str = arg_list
         .map((x) => JSON.stringify(x) || x.toString())
@@ -177,3 +177,5 @@ The argument representaion/serialization could also be improved. Currently these
 ## Conclusion
 
 This serves as a surprisingly nice to use interface for GPT-3 where a user can write arbitrary prompts with dynamic input in the form of invokable method calls and parameters. While I highly doubt this will ever be useful, I think seeing new methods for how we as developers may interface with LLMs as time goes on is fascinating.
+
+**Update:** If you are interested in seeing this same idea applied to webpages instead of simple functions, check out my next post: [Rewriting Requests with GPT-3](/serviceworker-gpt-3)
