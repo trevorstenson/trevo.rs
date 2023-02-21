@@ -42,10 +42,10 @@ export async function getStaticProps({ params }) {
   let nextPost = null;
   const nextAndPrevPosts = getNextAndPrevPosts(params.id);
   if (nextAndPrevPosts.previous !== null) {
-    // prevPost = {
-    //   id: nextAndPrevPosts.previous,
-    //   ...getPostData(nextAndPrevPosts.previous),
-    // };
+    prevPost = {
+      id: nextAndPrevPosts.previous,
+      ...getPostData(nextAndPrevPosts.previous),
+    };
   }
   if (nextAndPrevPosts.next !== null) {
     nextPost = {
