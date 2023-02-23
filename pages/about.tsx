@@ -29,8 +29,8 @@ export default function About() {
         </p>
         <h2>Work</h2>
         <p>
-          I am currently a full stack engineer at <a>Reprise</a> building an
-          infrastructure-less web platform for no-code product demos.
+          I am currently a full stack engineer at <a>Reprise</a> building a
+          web platform for infrastructure-less no-code product demos.
         </p>
         <p>
           In 2020, I worked at <a>Smartleaf</a> building an enterprise ruby on
