@@ -29,14 +29,14 @@ export default function About() {
         </p>
         <h2>Work</h2>
         <p>
-          I am currently a full stack engineer at <a href="https://www.reprise.com">Reprise</a> building a
+          I am currently a full stack engineer at <a href="https://www.reprise.com/">Reprise</a> building a
           web platform for infrastructure-less no-code product demos.
         </p>
         <p>
-          In 2020, I worked at <a href="https://www.smartleaf.com">Smartleaf</a> building an enterprise ruby on
+          In 2020, I worked at <a href="https://www.smartleaf.com/">Smartleaf</a> building an enterprise ruby on
           rails platform for automated tax-loss harvesting. Before that I
           contributed to multiple full stack client projects at{" "}
-          <a href="https://rightpoint.com">Rightpoint</a>.
+          <a href="https://rightpoint.com/">Rightpoint</a>.
         </p>
         <h2>Contact</h2>
         <p>
