@@ -261,6 +261,6 @@ If I continue working on this in the future, I would like to explore the followi
 - **Complex input support**: As mentioned earlier, the support for highly variable inputs like text is lacking. Providing the ability for user-defined strategies on an input-by-input basis based on context, or the ability to have predefined strategies for certain types of inputs, would be a good start.
 - **Combining other fuzzing approaches**: Combining this approach with others, such as genetic algorithms or vision-based analysis/diffing to determine states, would be interesting. By integrating heuristics from other related tools, we could potentially achieve a more complete and reliable picture of component behavior.
 
-To take a look at the code, [check out the repository](https://github.com/trevorstenson/react-fuzzer).
+To take a look at the code and use it for yourself, [check out the repository](https://github.com/trevorstenson/react-fuzzer).
 
 I've had this idea bouncing around my head for a while, and I'm glad I finally got around to implementing some version of it. If anyone has any thoughts or suggestions, I'd love to hear them!
