@@ -60,7 +60,7 @@ export default function Home({ allPostsData, description, words }) {
 
           <div>
             <p className="avatar-text">
-              Hey, Im Trevor Stenson, and welcome to my personal site! I am a
+              Hey, I'm Trevor Stenson, and welcome to my personal site! I am a
               full stack software engineer at Reprise interested in all things
               web development.
             </p>
