@@ -1,6 +1,6 @@
 import siteConfig from "../siteConfig.json";
 // import meAvatar from "../public/assets/avatar-v1.jpg";
-import meAvatar from "../public/assets/my_face.jpg";
+import meAvatar from "../public/assets/green_face.jpg";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -39,23 +39,35 @@ export default function Home({ allPostsData, description, words }) {
     <Layout title="Blog" description={description}>
       <main>
         <div className="avatar">
-          <Image
-            width={140}
-            height={191}
-            src={meAvatar}
-            alt="Trevor Stenson."
-            quality={100}
-            placeholder="blur"
-            priority={true}
-          />
+          <div
+            style={{
+              borderRadius: "10px",
+              overflow: "hidden",
+              height: "160px",
+              width: "160px",
+            }}
+          >
+            <Image
+              src={meAvatar}
+              objectFit="cover"
+              layout="responsive"
+              alt="Trevor Stenson"
+              quality={100}
+              placeholder="blur"
+              priority={true}
+            />
+          </div>
+
           <div>
-            
-          <p className="avatar-text">
-            Hey, Im Trevor Stenson, and welcome to my personal site!
-            I am a full stack software engineer at Reprise interested in
-            all things web development.
-          </p>
-          <p className="avatar-text">Feel free to check out my <Link href="/blog">blog</Link> or learn more <Link href="/about">about me</Link>.</p>
+            <p className="avatar-text">
+              Hey, Im Trevor Stenson, and welcome to my personal site! I am a
+              full stack software engineer at Reprise interested in all things
+              web development.
+            </p>
+            <p className="avatar-text">
+              Feel free to check out my <Link href="/blog">blog</Link> or learn
+              more <Link href="/about">about me</Link>.
+            </p>
           </div>
         </div>
 
@@ -63,7 +75,11 @@ export default function Home({ allPostsData, description, words }) {
           <section className="posts-section">
             <h2>
               Recent (
-              <Link href="/blog" legacyBehavior>{`${allPostsData.length} posts`}</Link>)
+              <Link
+                href="/blog"
+                legacyBehavior
+              >{`${allPostsData.length} posts`}</Link>
+              )
             </h2>
             <PostList posts={allPostsData.slice(0, 3)} hideTags={true} />
           </section>
@@ -81,7 +97,8 @@ export default function Home({ allPostsData, description, words }) {
       {/* <footer>
         <Newsletter />
       </footer> */}
-      <style jsx>{`.avatar {
+      <style jsx>{`
+        .avatar {
           display: flex;
           align-items: center;
           padding-top: 36px;
