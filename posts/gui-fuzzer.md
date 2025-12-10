@@ -33,7 +33,7 @@ The obvious challenge with this approach is tracking all possible states. What c
 
 Naively, the simplest approach would be comparing the final rendered HTML of a component after each input. This is not a good approach for one major reason: very minor changes in the component's rendered DOM would register as a new state. Problematic examples include:
 
-1.  Different counts of entries in an <li> element that the user may see as the same state, but the code would not.
+1.  Different counts of entries in an `<li>` element that the user may see as the same state, but the code would not.
 2.  Functions that aren't determined solely by component input (e.g. `Date.now()` or a random number generator) would cause the component to render differently each time, even if the input is the same.
 
 Ultimately, you'd end up with a huge number of states that are possibly the same from a user's perspective.
