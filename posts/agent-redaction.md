@@ -1,5 +1,5 @@
 ---
-title: "Keeping Secrets out of your Agent's Context"
+title: "Keeping Secrets Out of Your Agent's Context"
 date: "2025-12-27"
 tags: ["AI", "javascript"]
 description: "Reliably preventing sensitive data from leaking into Claude Code"
