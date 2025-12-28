@@ -1,7 +1,7 @@
 ---
 title: "Proxies and ChatGPT"
 date: "2023-01-15"
-tags: ["javascript", "LLMs"]
+tags: ["AI", "javascript"]
 description: "Messing with runtime LLM function generation"
 ---
 

@@ -7,38 +7,56 @@ const POSTS_DIRECTORY = path.join(process.cwd(), "posts");
 export function getAllPostIds() {
   const fileNames = fs.readdirSync(POSTS_DIRECTORY);
 
-  return fileNames.map((fileName) => {
-    return {
-      params: {
-        id: fileName.replace(".md", ""),
-      },
-    };
-  });
+  return fileNames
+    .map((fileName) => {
+      const fullPath = path.join(POSTS_DIRECTORY, fileName);
+      const fileContents = fs.readFileSync(fullPath, "utf8");
+      const matterResult = matter(fileContents);
+      
+      // Skip draft posts
+      if (matterResult.data.draft === true) {
+        return null;
+      }
+      
+      return {
+        params: {
+          id: fileName.replace(".md", ""),
+        },
+      };
+    })
+    .filter((post) => post !== null);
 }
 
 export function getSortedPostsData() {
   // Get directory names under /posts
   const fileNames = fs.readdirSync(POSTS_DIRECTORY);
 
-  const allPostsData = fileNames.map((fileName) => {
-    // Read markdown file as string
-    const fullPath = path.join(POSTS_DIRECTORY, path.join(fileName));
-    const fileContents = fs.readFileSync(fullPath, "utf8");
+  const allPostsData = fileNames
+    .map((fileName) => {
+      // Read markdown file as string
+      const fullPath = path.join(POSTS_DIRECTORY, path.join(fileName));
+      const fileContents = fs.readFileSync(fullPath, "utf8");
 
-    // Use gray-matter to parse the post metadata section
-    const matterResult = matter(fileContents);
+      // Use gray-matter to parse the post metadata section
+      const matterResult = matter(fileContents);
 
-    // Combine the data with the id
-    return {
-      id: fileName.replace(".md", ""),
-      // Could also grab content, not yet required
-      // content: matterResult.content,
-      title: matterResult.data.title,
-      description: matterResult.data.description,
-      date: matterResult.data.date,
-      tags: matterResult.data.tags,
-    };
-  });
+      // Skip draft posts
+      if (matterResult.data.draft === true) {
+        return null;
+      }
+
+      // Combine the data with the id
+      return {
+        id: fileName.replace(".md", ""),
+        // Could also grab content, not yet required
+        // content: matterResult.content,
+        title: matterResult.data.title,
+        description: matterResult.data.description,
+        date: matterResult.data.date,
+        tags: matterResult.data.tags,
+      };
+    })
+    .filter((post) => post !== null);
 
   // Sort posts by date
   return allPostsData.sort(({ date: a }, { date: b }) => {

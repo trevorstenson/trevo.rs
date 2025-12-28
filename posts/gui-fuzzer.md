@@ -1,7 +1,7 @@
 ---
 title: "Experiments in Fuzzing React GUIs"
 date: "2024-05-31"
-tags: ["javascript", "react"]
+tags: ["react", "javascript"]
 description: "Coverage-guided fuzz testing and state visualization of React components"
 ---
 

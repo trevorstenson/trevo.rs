@@ -1,7 +1,7 @@
 ---
 title: "Rewriting Requests with GPT-3"
 date: "2023-02-19"
-tags: ["javascript", "LLMs"]
+tags: ["AI", "javascript"]
 description: "Generating webpages on-the-fly with GPT-3"
 ---
 
