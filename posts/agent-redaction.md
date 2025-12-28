@@ -5,13 +5,13 @@ tags: ["AI", "javascript"]
 description: "Reliably preventing sensitive data from leaking into Claude Code"
 ---
 
-During the last year of interfacing predominantly through agents for both professional and personal development workflows, one of the things i've been impressed by is the ability of agents to accomplish the same task in mutliple different ways. If I ask a computer-use agent to find where my database connection string is defined, it could arrive there by running `grep -r "postgres" .`, by guessing and checking `cat .env`, or by recursively listing files to look for config patterns. It uses different native tools through `bash` as well as built-in tools exposed to the model (such as `Read()`). This decision-making and constant adjustment to feedback is a superpower, but can sometimes provide too much access to your sensitive data.
+Over the last year, I've spent a lot of time working with agents for both work and side projects. One thing that consistently impresses me is their ability to accomplish the same task in multiple different ways. If I ask an agent to "find where my database connection string is defined", it might run `grep`, check `.env`, or just start listing files. It has options. This flexibility is a superpower, but it also means it can be surprisingly good at finding things I don't want it to see.
 
 Almost every development project has a `.env` file or equivalent that manages sensitive keys for your code to use. Modern agents operate exactly the same as if *you* were the one running the command. This is fine for source code, but is undesirable for secrets! Claude Code provides a permissioning object in the `claude.json` schema for blocking specific tool uses that works extremely well for things like blocking `Read(./.env)`, but falls apart when the `Bash()` tool can creatively work around such limitations by using any command-line tool it can find at its disposal. Once this gets into the context window its potentially exposed to things like model provider logs or conversation history. Not ideal.
 
 ## Hook Redaction
 
-Since the static deny-list is easily sidestepped by a creative agent, we need a mechanism that's a bit stickier. This is where the [Hooks API](https://code.claude.com/docs/en/hooks-guide) comes in. It allows us to intercept tool calls—like `Read` or `Bash`—and modify their inputs before they actually run. By listening for the [PreToolUse](https://code.claude.com/docs/en/hooks#supported-hook-events) event, we can inspect the agent's intent and dynamically swap out sensitive file paths for safe ones.
+Since the static deny-list is easily sidestepped by a creative agent, we need a mechanism that's a bit more reliable. This is where the [Hooks API](https://code.claude.com/docs/en/hooks-guide) comes in. It allows us to intercept tool calls like `Read()` or `Bash()` and modify their inputs before they actually run. By listening for the [PreToolUse](https://code.claude.com/docs/en/hooks#supported-hook-events) event, we can monitor the agent's intent and dynamically swap out sensitive file paths for safe ones.
 
 The approach is straightforward:
 
@@ -205,11 +205,11 @@ For my usecases, this is more than enough in its current state.
 
 ## Try It
 
+Check out the source code on [GitHub](https://github.com/trevorstenson/claude-redact-env) if you want to see the full implementation.
+
 ```bash
 git clone https://github.com/trevorstenson/claude-redact-env
 cd claude-redact-env
 npm install && npm run build
 node dist/cli.js install
 ```
-
-Check out the source code on [GitHub](https://github.com/trevorstenson/claude-redact-env) if you want to see the full implementation.
