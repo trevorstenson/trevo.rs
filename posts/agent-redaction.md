@@ -6,15 +6,13 @@ description: "Reliably preventing sensitive data from leaking into Claude Code"
 draft: true
 ---
 
-During the last year of interfacing predominantly through agents for both professional and personal development workflows, one of the things i've been impressed by is the ability of agents to accomplish the same task in mutliple different ways. If I ask a computer-use agent to <insert example that has multiple ambiguous tool uses or paths. or multiple different bash commans (grep, bash, read, open)> , it may have many valid solutions. Using different native tools through `bash` (grep, find, etc) as well as built-in tools exposed to the model (such as `Read()`). This decision-making and constant adjustment to feedback is a superpower, but can sometimes provide too much access to your sensitive data.
+During the last year of interfacing predominantly through agents for both professional and personal development workflows, one of the things i've been impressed by is the ability of agents to accomplish the same task in mutliple different ways. If I ask a computer-use agent to find where my database connection string is defined, it could arrive there by running `grep -r "postgres" .`, by guessing and checking `cat .env`, or by recursively listing files to look for config patterns. It uses different native tools through `bash` as well as built-in tools exposed to the model (such as `Read()`). This decision-making and constant adjustment to feedback is a superpower, but can sometimes provide too much access to your sensitive data.
 
 Almost every development project has a `.env` file or equivalent that manages sensitive keys for your code to use. Modern agents operate exactly the same as if *you* were the one running the command. This is fine for source code, but is undesirable for secrets! Claude Code provides a permissioning object in the `claude.json` schema for blocking specific tool uses that works extremely well for things like blocking `Read(./.env)`, but falls apart when the `Bash()` tool can creatively work around such limitations by using any command-line tool it can find at its disposal. Once this gets into the context window its potentially exposed to things like model provider logs or conversation history. Not ideal.
 
 ## Hook Redaction
 
-I wanted to find a way to more generalizably prevent unwanted access to these files <fix this sentence make it better (MAYBE REMOVE)>.
-
-If Claude Code's tool deny-list can realistically be bypassed, we need a better mechanism for blocking these reads. All frontier model agent providers provide some sort of tooling for lifecycle hooks, and in the case of Claude Code this takes the form of the [Hooks API](https://code.claude.com/docs/en/hooks-guide). These hooks allow you to intercept, read, block, and - most importantly in our case - modify tool inputs, outputs, and behavior as needed. The [PreToolUse](https://code.claude.com/docs/en/hooks#supported-hook-events) hook event explicitly deals with making context-aware decisions based on the intent of tool uses before they execute. If we can utilize basic heuristics to dynamically modify what the tool sees, we can provide a better solution.
+Since the static deny-list is easily sidestepped by a creative agent, we need a mechanism that's a bit stickier. This is where the [Hooks API](https://code.claude.com/docs/en/hooks-guide) comes in. It allows us to intercept tool calls—like `Read` or `Bash`—and modify their inputs before they actually run. By listening for the [PreToolUse](https://code.claude.com/docs/en/hooks#supported-hook-events) event, we can inspect the agent's intent and dynamically swap out sensitive file paths for safe ones.
 
 The approach is straightforward:
 
@@ -41,7 +39,7 @@ The hook output structure looks like this:
 }
 ```
 
-By returning `updatedInput`, we can rewrite any parameter the tool was about to use. The agent has no idea the path changed—it just reads the redacted temp file instead.
+By returning `updatedInput`, we can rewrite any parameter the tool was about to use. The agent has no idea the path changed, and just reads the redacted temp file instead.
 
 ### Handling Read
 
@@ -71,11 +69,11 @@ function handleReadTool(input: HookInput): object | null {
 }
 ```
 
-Returning `null` means "no modification"—let the original call through.
+Returning `null` means means no modification occurs and the original file is read.
 
 ### Handling Bash
 
-Bash is where it gets interesting. Agents are creative. Even if you block `Read(.env)`, nothing stops the agent from running `cat .env` or `head -n 50 .env.local` or `grep API_KEY credentials.json`.
+Bash is where it gets interesting. Even if you block `Read(.env)`, nothing stops the agent from running `cat .env` or `head -n 50 .env.local` or `grep API_KEY credentials.json`.
 
 To catch these, we need to:
 1. Detect if the command reads files (`cat`, `head`, `tail`, `grep`, `awk`, `sed`, etc.)
@@ -170,7 +168,7 @@ export const SECRET_PATTERNS: SecretPattern[] = [
 ];
 ```
 
-Connection strings get special treatment—credentials are replaced while the rest of the URI stays intact, so the agent can still understand the database structure without seeing `admin:hunter2`.
+Connection strings are a bit different. I just scrub the credentials and leave the rest of the URI alone. This way, the agent can still figure out the database structure without ever seeing `admin:hunter2`.
 
 ## What Claude Sees
 
@@ -194,28 +192,25 @@ DEBUG=true
 PORT=3000
 ```
 
-Non-secrets like `DEBUG=true` pass through untouched. The agent can still understand your config—it just can't see the actual values that matter.
+Non-secrets like `DEBUG=true` pass through untouched. The agent can still understand your config, as the redacted values maintain most of their structure, and highlight the core meaning of what they represent.
 
 ## Caveats
 
-This catches roughly 95% of typical agent file access patterns. But there are gaps:
+This catches a large majority of Claude Code's file access patterns, but there are definitely gaps:
 
 - **Dynamic path construction**: `cat $(echo ".env")` might slip through
 - **Subprocesses**: If the agent runs a Python or Node script that reads `.env` internally, the hook won't intercept it
-- **Write operations**: This only protects reads—if the agent already knows a secret from earlier context, it can still write it somewhere
 - **Encoded paths**: Base64 or other encodings won't be caught
 
-For the common case of "Claude, help me debug my environment config"—it works.
+For my usecases, this is more than enough in its current state.
 
 ## Try It
 
 ```bash
-git clone https://github.com/yourusername/claude-redact-env
+git clone https://github.com/trevorstenson/claude-redact-env
 cd claude-redact-env
 npm install && npm run build
 node dist/cli.js install
 ```
 
-Then fully restart Claude Code (Cmd+Q / Ctrl+Q—not just a new session). Hooks only load on startup.
-
-The source is on [GitHub](https://github.com/yourusername/claude-redact-env) if you want to extend the patterns or poke at the implementation.
+Check out the source code on [GitHub](https://github.com/trevorstenson/claude-redact-env) if you want to see the full implementation.
