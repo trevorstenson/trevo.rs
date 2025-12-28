@@ -3,7 +3,6 @@ title: "Keeping Secrets out of your Agent's Context"
 date: "2025-12-27"
 tags: ["AI", "javascript"]
 description: "Reliably preventing sensitive data from leaking into Claude Code"
-draft: true
 ---
 
 During the last year of interfacing predominantly through agents for both professional and personal development workflows, one of the things i've been impressed by is the ability of agents to accomplish the same task in mutliple different ways. If I ask a computer-use agent to find where my database connection string is defined, it could arrive there by running `grep -r "postgres" .`, by guessing and checking `cat .env`, or by recursively listing files to look for config patterns. It uses different native tools through `bash` as well as built-in tools exposed to the model (such as `Read()`). This decision-making and constant adjustment to feedback is a superpower, but can sometimes provide too much access to your sensitive data.
@@ -21,6 +20,30 @@ The approach is straightforward:
 3. Create a redacted temp copy on-the-fly
 4. Rewrite `file_path` to point to the redacted version
 5. Claude sees the redacted content, original stays untouched
+
+The goal is to maintain the data structure and relevant information while only redacting the sensitive parts. Here is what that transformation looks like in practice:
+
+Your actual `.env`:
+
+```bash
+OPENAI_API_KEY=sk-proj-abc123secretkey789xyz
+STRIPE_SECRET_KEY=sk_live_supersecretstripekey
+DATABASE_URL=postgres://admin:hunter2@prod.db.com/main
+DEBUG=true
+PORT=3000
+```
+
+What Claude receives:
+
+```bash
+OPENAI_API_KEY=<REDACTED:OPENAI_PROJECT_KEY>
+STRIPE_SECRET_KEY=<REDACTED:STRIPE_SECRET>
+DATABASE_URL=postgres://<USER>:<REDACTED>@prod.db.com/main
+DEBUG=true
+PORT=3000
+```
+
+Non-secrets like `DEBUG=true` pass through untouched. The agent can still understand your config, as the redacted values maintain most of their structure, and highlight the core meaning of what they represent.
 
 ## Implementation
 
@@ -169,30 +192,6 @@ export const SECRET_PATTERNS: SecretPattern[] = [
 ```
 
 Connection strings are a bit different. I just scrub the credentials and leave the rest of the URI alone. This way, the agent can still figure out the database structure without ever seeing `admin:hunter2`.
-
-## What Claude Sees
-
-Your actual `.env`:
-
-```
-OPENAI_API_KEY=sk-proj-abc123secretkey789xyz
-STRIPE_SECRET_KEY=sk_live_supersecretstripekey
-DATABASE_URL=postgres://admin:hunter2@prod.db.com/main
-DEBUG=true
-PORT=3000
-```
-
-What Claude receives:
-
-```
-OPENAI_API_KEY=<REDACTED:OPENAI_PROJECT_KEY>
-STRIPE_SECRET_KEY=<REDACTED:STRIPE_SECRET>
-DATABASE_URL=postgres://<USER>:<REDACTED>@prod.db.com/main
-DEBUG=true
-PORT=3000
-```
-
-Non-secrets like `DEBUG=true` pass through untouched. The agent can still understand your config, as the redacted values maintain most of their structure, and highlight the core meaning of what they represent.
 
 ## Caveats
 
